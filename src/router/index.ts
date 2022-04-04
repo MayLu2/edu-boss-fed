@@ -3,7 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import Layout from '@/layout/index.vue'
 import store from '@/store'
 // import nprogress from 'nprogress'
-import 'nprogress/nprogress.css'
+// import 'nprogress/nprogress.css'
 Vue.use(VueRouter)
 const flag = true
 /// 路由
@@ -62,6 +62,16 @@ const routes: Array<RouteConfig> = [
         name: 'resource',
         component: () => import(/* webpackChunkName:'resource' */ '@/views/resource/index.vue'),
         meta: { requiresAuth: flag }/// 路由元信息
+      }, {
+        path: '/menu/create',
+        name: 'menu-create',
+        component: () => import(/* webpackChunkName:'menu-create' */ '@/views/menu/create.vue'),
+        meta: { requiresAuth: flag }/// 路由元信息
+      },
+      {
+        path: '/menu/:id/edit',
+        name: 'menu-edit',
+        component: () => import(/* webpackChunkName: 'menu-create-edit' */ '@/views/menu/edit.vue')
       }
     ]
   }, {

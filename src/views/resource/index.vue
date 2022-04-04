@@ -1,12 +1,17 @@
 <template>
-  <div class="resource">资料</div>
+  <div class="resource">
+    <resource-list></resource-list>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-
+import ResourceList from './components/List.vue'
 export default Vue.extend({
-  name: 'ResourceIndex'
+  name: 'ResourceIndex',
+  components: {
+    ResourceList
+  }
 })
 </script>
 
