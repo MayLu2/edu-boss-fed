@@ -41,6 +41,7 @@
         <el-table-column
           prop="createdTime"
           label="添加时间"
+          :formatter="dataFormat"
         />
         <el-table-column
           label="操作"
@@ -176,6 +177,16 @@ export default Vue.extend({
     handleAdd () {
       this.isEdit = false
       this.dialogVisible = true
+    },
+    // 修改时间格式
+    dataFormat: function (row:any, column:any) {
+      const data = row[column.property]
+      if (data === null) {
+        return ''
+      }
+      const dt = new Date(data)
+      // console.log("dt"+dt);
+      return dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate()
     }
   }
 })

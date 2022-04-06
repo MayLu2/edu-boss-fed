@@ -57,7 +57,8 @@
                 </el-table-column>
                 <el-table-column
                 prop="createdTime"
-                label="添加时间">
+                label="添加时间"
+                :formatter="dataFormat">
                 </el-table-column>
                 <el-table-column
                 label="操作">
@@ -164,6 +165,17 @@ export default Vue.extend({
       this.form.current = 1 // 筛选查询从第 1 页开始
       this.loadResources()
     //   网络较慢时，设置loading，避免无用重复请求
+    },
+    // 时间格式
+    // 修改时间格式
+    dataFormat: function (row:any, column:any) {
+      const data = row[column.property]
+      if (data === null) {
+        return ''
+      }
+      const dt = new Date(data)
+      // console.log("dt"+dt);
+      return dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate()
     }
   }
 })
