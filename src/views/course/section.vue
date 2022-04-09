@@ -34,7 +34,7 @@
                 </span>
                 <!-- lesson课时 -->
                 <span v-else>
-                    <el-button size="mini">编辑</el-button>
+                    <el-button size="mini"  @click="handleShowEditLesson(data, node.parent.data)">编辑</el-button>
                     <el-button size="mini" type="success">上传视频</el-button>
                     <el-select
                         size="mini"
@@ -92,18 +92,18 @@
                <el-form-item label="章节名称" prop="sectionName">
                    <el-input :value="lesson.sectionName" disabled autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="课时名称" prop="sectionName">
+                <el-form-item label="课时名称" prop="theme">
                    <el-input v-model="lesson.theme" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="时长" prop="description">
+                <el-form-item label="时长" prop="duration">
                 <el-input v-model.number="lesson.duration" type="number" autocomplete="off">
                     <template slot="append">分钟</template>
                 </el-input>
                 </el-form-item>
-                <el-form-item label="是否开放试听" prop="description">
+                <el-form-item label="是否开放试听" prop="isFree">
                     <el-switch v-model="lesson.isFree"></el-switch>
                 </el-form-item>
-                <el-form-item label="课时排序" prop="description">
+                <el-form-item label="课时排序" prop="orderNum">
                     <el-input-number v-model="lesson.orderNum"></el-input-number>
                 </el-form-item>
             </el-form>
@@ -218,7 +218,7 @@ export default Vue.extend({
         orderNum: 0,
         status: 0
       }
-      this.isAddSectionShow = true
+      this.isAddLessonShow = true
     },
     // 添加课时
     async handleAddLesson () {
@@ -230,6 +230,12 @@ export default Vue.extend({
       } else {
         this.$message.error(data.mesg)
       }
+    },
+    // 编辑课时
+    handleShowEditLesson (lesson: any, section: any) {
+      this.lesson = lesson
+      this.lesson.sectionName = section.sectionName
+      this.isAddLessonShow = true
     },
     // 修改章节状态
     async handleSectionStatusChange (section: any) {
